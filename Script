@@ -1,0 +1,47 @@
+
+function isValidServiceQuality(quality) {
+    return quality === 'great' || quality === 'ok' || quality === 'poor';
+}
+
+
+function isValidServiceAmount(amount) {
+    return amount >= 5 && amount <= 500 && !isNaN(amount);
+}
+
+function calculateTip(serviceAmount, serviceQuality) {
+    let tipPercentage = 0;
+
+    switch (serviceQuality) {
+        case 'great':
+            tipPercentage = 0.2; 
+            break;
+        case 'ok':
+            tipPercentage = 0.15; 
+            break;
+        case 'poor':
+            tipPercentage = 0.1; 
+            break;
+        default:
+            break;
+    }
+
+    return serviceAmount * tipPercentage;
+}
+
+let serviceAmount = parseFloat(prompt('Enter the dollar amount of the service:'));
+
+if (isValidServiceAmount(serviceAmount)) {
+    
+    let serviceQuality = prompt('Rate the service quality as great, ok, or poor:').toLowerCase();
+
+    if (isValidServiceQuality(serviceQuality)) {
+
+        let tipAmount = calculateTip(serviceAmount, serviceQuality);
+
+        alert(`For a service amount of $${serviceAmount.toFixed(2)}, the ${serviceQuality} service quality receives a recommended tip of $${tipAmount.toFixed(2)}.`);
+    } else {
+        alert('Please enter a valid service quality (great, ok, or poor).');
+    }
+} else {
+    alert('Please enter a valid dollar amount for the service between $5.00 and $500.00.');
+}
